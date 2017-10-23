@@ -10,7 +10,7 @@ import UIKit
 
 class PreviewControllerToolbar: UIToolbar {
     
-    override func setItems(items: [UIBarButtonItem]?, animated: Bool) {
+    override func setItems(_ items: [UIBarButtonItem]?, animated: Bool) {
         super.setItems([], animated: false)
     }
 }

@@ -14,11 +14,11 @@ class PreviewNavigationController: UINavigationController {
         super.viewDidLoad()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if let controller = viewControllers.first {
-            let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target:self, action:#selector(doneButtonTapped))
+            let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target:self, action:#selector(doneButtonTapped))
             controller.navigationItem.leftBarButtonItem = doneButton
         }
     }
@@ -31,7 +31,7 @@ class PreviewNavigationController: UINavigationController {
 
 extension PreviewNavigationController {
     
-    func doneButtonTapped() -> Void {
-        dismissViewControllerAnimated(true, completion: nil)
+    @objc func doneButtonTapped() -> Void {
+        dismiss(animated: true, completion: nil)
     }
 }

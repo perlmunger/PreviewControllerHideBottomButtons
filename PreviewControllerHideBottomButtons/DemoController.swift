@@ -11,7 +11,7 @@ import QuickLook
 
 class DemoController: UIViewController {
 
-    private let itemsArray:[String] = ["image1", "image2", "image3"]
+    fileprivate let itemsArray:[String] = ["image1", "image2", "image3"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,14 +25,14 @@ class DemoController: UIViewController {
 //MARK: - IBActions
 extension DemoController {
     
-    @IBAction func presentPreviewControllerTapped(sender: UIButton) {
+    @IBAction func presentPreviewControllerTapped(_ sender: UIButton) {
         
         let previewController = QLPreviewController()
         previewController.dataSource = self
         
         let previewNavigationController = PreviewNavigationController(navigationBarClass:nil, toolbarClass: PreviewControllerToolbar.self)
         previewNavigationController.pushViewController(previewController, animated: false)
-        presentViewController(previewNavigationController, animated:true, completion: nil)
+        present(previewNavigationController, animated:true, completion: nil)
     }
 }
 
@@ -41,17 +41,17 @@ extension DemoController {
 //MARK: - QLPreviewControllerDataSource
 extension DemoController : QLPreviewControllerDataSource {
     
-    func numberOfPreviewItemsInPreviewController(controller: QLPreviewController) -> Int {
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         return itemsArray.count
     }
     
-    func previewController(controller: QLPreviewController, previewItemAtIndex index: Int) -> QLPreviewItem {
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         
-        guard let filePath = NSBundle.mainBundle().pathForResource(itemsArray[index], ofType:"jpg") else {
-            return NSURL()
+        guard let filePath = Bundle.main.path(forResource: itemsArray[index], ofType:"jpg") else {
+            return URL(fileURLWithPath: "bob") as QLPreviewItem
         }
         
-        let url = NSURL.fileURLWithPath(filePath)
-        return url
+        let url = URL(fileURLWithPath: filePath)
+        return url as QLPreviewItem
     }
 }
